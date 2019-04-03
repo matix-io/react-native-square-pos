@@ -3,7 +3,13 @@ const SquarePOS = NativeModules.RNSquarePos
 
 let callbackUrl
 
+const errors = {
+	CANNOT_OPEN_SQUARE: 'CANNOT_OPEN_SQUARE',
+	UNKNOWN_IOS_ERROR: 'UNKNOWN_IOS_ERROR',
+}
+
 const RNSquarePos = {
+	ERRORS: errors,
 	configure: (options) => {
 		SquarePOS.setApplicationId(options.applicationId)
 		callbackUrl = options.callbackUrl
@@ -24,8 +30,25 @@ const RNSquarePos = {
 
 				DeviceEventEmitter.addListener('RNSquarePOSReponse', handleResponse);
 			} else if (Platform.OS === 'ios') {
-				SquarePOS.startTransaction(amount, currency, options, callbackUrl)
-				Linking.addEventListener('url', (event) => {
+				SquarePOS.startTransaction(amount, currency, options, callbackUrl, (errorCode, errorDescription) => {
+					switch (errorCode) {
+						case 6:
+							reject({
+								errorCode: errors.CANNOT_OPEN_SQUARE
+							})
+							break
+
+						default:
+							reject({
+								errorCode: errors.UNKNOWN_IOS_ERROR,
+								errorDescription
+							})
+							break
+					}
+				})
+
+				function handleIOSResponse(event) {
+					Linking.removeEventListener('url', handleIOSResponse);
 					const url = event.url
 
 					if (url.match(callbackUrl)) {
@@ -42,7 +65,9 @@ const RNSquarePos = {
 							})
 						}
 					}
-				})
+				}
+
+				Linking.addEventListener('url', handleIOSResponse);
 			}
 		})
 	},

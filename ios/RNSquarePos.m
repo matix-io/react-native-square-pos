@@ -16,6 +16,7 @@ RCT_EXPORT_METHOD(
 	currency:(NSString *)currency 
 	options:(NSDictionary *)options 
 	callbackUrl:(NSString *)callbackUrl
+	onError:(RCTResponseSenderBlock)onError
 ) {
 	NSError *error;
 	NSURL *const callbackURL = [NSURL URLWithString:callbackUrl];
@@ -78,6 +79,9 @@ RCT_EXPORT_METHOD(
 								   returnAutomaticallyAfterPayment:autoReturn
 															 error:&error];
 	[SCCAPIConnection performRequest:request error:&error];
+	if (error != nil) {
+		onError(@[[NSNumber numberWithInt:[error code]], [error localizedDescription]]);
+	}
 }
 
 - (dispatch_queue_t)methodQueue
