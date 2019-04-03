@@ -28,7 +28,7 @@ const RNSquarePos = {
 					}
 				}
 
-				DeviceEventEmitter.addListener('RNSquarePOSReponse', handleResponse);
+				DeviceEventEmitter.addListener('RNSquarePOSResponse', handleResponse);
 			} else if (Platform.OS === 'ios') {
 				SquarePOS.startTransaction(amount, currency, options, callbackUrl, (errorCode, errorDescription) => {
 					switch (errorCode) {

@@ -1,5 +1,5 @@
 
-package com.reactlibrary;
+package io.matix;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -75,7 +75,7 @@ public class RNSquarePosModule extends ReactContextBaseJavaModule {
 
 	@Override
 	public String getName() {
-		return "RNSquarePOS";
+		return "RNSquarePos";
 	}
 
 	@ReactMethod
