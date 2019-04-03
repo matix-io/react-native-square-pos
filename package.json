@@ -17,7 +17,7 @@
   ],
   "author": "Connor Bode <connor@matix.io>",
   "license": "MIT",
-  "homepage": "https://github.com/matix-io/react-native-square-pos"
+  "homepage": "https://github.com/matix-io/react-native-square-pos",
   "peerDependencies": {
     "react-native": "^0.41.2"
   }
