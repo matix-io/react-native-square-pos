@@ -46,18 +46,31 @@ const RNSquarePos = {
 	transaction: (amount, currency, options = {}) => {
 		return new Promise((resolve, reject) => {
 			if (Platform.OS === 'android') {
-				SquarePOS.startTransaction(amount, currency, options)
+				SquarePOS.startTransaction(amount, currency, options, () => {
+					return reject({
+						errorCode: errors.CANNOT_OPEN_SQUARE
+					})
+				})
 
 				function handleResponse(data) {
 					DeviceEventEmitter.removeListener('RNSquarePOSResponse', handleResponse);
 					if (data.errorCode) {
-						return reject(data)
+						if (androidErrors[data.errorCode]) {
+							return reject({
+								errorCode: androidErrors[data.errorCode]
+							})
+						} else {
+							return reject({
+								errorCode: errors.UNKNOWN_ANDROID_ERROR,
+								originalCode: data.errorCode
+							})
+						}
 					} else {
 						return resolve(data)
 					}
 				}
 
-				DeviceEventEmitter.addListener('RNSquarePOSReponse', handleResponse);
+				DeviceEventEmitter.addListener('RNSquarePOSResponse', handleResponse);
 			} else if (Platform.OS === 'ios') {
 				SquarePOS.startTransaction(amount, currency, options, callbackUrl, (errorCode, errorDescription) => {
 					switch (errorCode) {
@@ -110,3 +123,4 @@ const RNSquarePos = {
 }
 
 export default RNSquarePos;
+

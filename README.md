@@ -1,10 +1,7 @@
 
 # react-native-square-pos
 
-**Big note, this is under development at the moment.  Give me a week and it'll be properly documented.*
-
 ## Getting started
-
 
 ### Installation
 
@@ -80,4 +77,4 @@ There are a number of different error codes, which may differ on Android / iOS. 
 
 Additionally, because this is a young project:
 
-- `UNKNOWN_IOS_ERROR` if the response from Square SDK wasn't handled by this package.  In this case, `originalCode` will be available, passing on what was returned from Square SDK.
+- `UNKNOWN_IOS_ERROR`, `UNKNOWN_ANDROID_ERROR`, if the response from Square SDK wasn't handled by this package.  In this case, `originalCode` will be available, passing on what was returned from Square SDK.
