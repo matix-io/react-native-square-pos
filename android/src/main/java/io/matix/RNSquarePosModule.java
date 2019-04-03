@@ -75,7 +75,7 @@ public class RNSquarePosModule extends ReactContextBaseJavaModule {
 
 	@Override
 	public String getName() {
-		return "RNSquarePOS";
+		return "RNSquarePos";
 	}
 
 	@ReactMethod
