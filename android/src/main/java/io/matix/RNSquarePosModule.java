@@ -96,7 +96,7 @@ public class RNSquarePosModule extends ReactContextBaseJavaModule {
 		);
 
 		if (data.hasKey("autoReturn")) {
-			builder.autoReturn(data.getInteger("autoReturn"), TimeUnit.MILLISECONDS);
+			builder.autoReturn(data.getInt("autoReturn"), TimeUnit.MILLISECONDS);
 		}
 
 		if (data.hasKey("note")) {
