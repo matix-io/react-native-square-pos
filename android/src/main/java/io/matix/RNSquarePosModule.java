@@ -1,5 +1,5 @@
 
-package com.reactlibrary;
+package io.matix;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
