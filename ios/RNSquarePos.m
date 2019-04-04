@@ -62,6 +62,12 @@ RCT_EXPORT_METHOD(
 		tenderTypes = SCCAPIRequestTenderTypeAll;
 	}
 
+	// location id
+	NSString *locationId = nil;
+	if ([options objectForKey:@"locationId"]) {
+		locationId = [options objectForKey:@"locationId"];
+	}
+
 	// autoreturn
 	BOOL autoReturn = NO;
 	if ([options objectForKey:@"returnAutomaticallyAfterPayment"]) {
