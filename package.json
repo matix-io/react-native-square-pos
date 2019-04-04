@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-square-pos",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "React Native wrapper around Square's Android / iOS POS SDKs",
   "main": "index.js",
   "scripts": {

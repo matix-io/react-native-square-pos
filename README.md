@@ -49,7 +49,8 @@ const options = {
     'CASH',
     'OTHER'
   ],
-  note: 'This note shows up on the transaction'
+  note: 'This note shows up on the transaction',
+  locationId: 'Optionally pass location Id', // only on iOS at the moment
 }
 SquarePOS.transaction(amountInCents, currency, options)
   .then((result) => {

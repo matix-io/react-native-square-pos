@@ -77,7 +77,7 @@ RCT_EXPORT_METHOD(
 	SCCAPIRequest *request = [SCCAPIRequest requestWithCallbackURL:callbackURL
 															amount:amount
 													userInfoString:nil
-														locationID:nil
+														locationID:locationId
 													   		 notes:notes
 														  customerID:nil
 											  supportedTenderTypes:tenderTypes
