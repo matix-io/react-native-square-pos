@@ -64,7 +64,7 @@ SquarePOS.transaction(amountInCents, currency, options)
   })
 ```
 
-### Error Codes
+### Errors
 
 There are a number of different error codes, which may differ on Android / iOS.  Eventually, an exhaustive list should be compiled here.  For now, here are the important ones:
 
@@ -75,7 +75,12 @@ There are a number of different error codes, which may differ on Android / iOS. 
 - `NO_NETWORK_CONNECTION`: No network connection on the phone
 - `AMOUNT_TOO_SMALL`: `amountInCents` was too small (iOS only)
 - `AMOUNT_TOO_LARGE`: `amountInCents` was too large (iOS only)
+- `INVALID_REQUEST`: Square Point-of-Sale couldn't process the request (because of malformed data or other) (Android only, check `err.squareResponse` for more information)
 
 Additionally, because this is a young project:
 
-- `UNKNOWN_IOS_ERROR`, `UNKNOWN_ANDROID_ERROR`, if the response from Square SDK wasn't handled by this package.  In this case, `originalCode` will be available, passing on what was returned from Square SDK.
+- `UNKNOWN_ANDROID_ERROR`, if the response from Square Android SDK if the response wasn't handled by this package.  On Android, you'll have access to `err.squareResponse` to see the entire response data sent back from Square Point-of-Sale.
+- `UNKNOWN_IOS_ERROR`, if the response from Square iOS SDK wasn't handled by this package.
+
+
+

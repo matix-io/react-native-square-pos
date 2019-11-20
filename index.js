@@ -16,6 +16,7 @@ const errors = {
 	UNSUPPORTED_TENDER_TYPE: 'UNSUPPORTED_TENDER_TYPE',
 	NO_NETWORK_CONNECTION: 'NO_NETWORK_CONNECTION',
 	TRANSACTION_ALREADY_IN_PROGRESS: 'TRANSACTION_ALREADY_IN_PROGRESS',
+  INVALID_REQUEST: 'INVALID_REQUEST',
 }
 
 const iosErrors = {
@@ -35,6 +36,7 @@ const androidErrors = {
 	USER_NOT_ACTIVATED: errors.USER_NOT_ACTIVE,
 	NO_NETWORK: errors.NO_NETWORK_CONNECTION,
 	TRANSACTION_ALREADY_IN_PROGRESS: errors.TRANSACTION_ALREADY_IN_PROGRESS, 
+  INVALID_REQUEST: errors.INVALID_REQUEST,
 }
 
 const RNSquarePos = {
@@ -57,12 +59,14 @@ const RNSquarePos = {
 					if (data.errorCode) {
 						if (androidErrors[data.errorCode]) {
 							return reject({
-								errorCode: androidErrors[data.errorCode]
+								errorCode: androidErrors[data.errorCode],
+                squareResponse: data
 							})
 						} else {
 							return reject({
 								errorCode: errors.UNKNOWN_ANDROID_ERROR,
-								originalCode: data.errorCode
+								originalCode: data.errorCode,
+                squareResponse: data
 							})
 						}
 					} else {
