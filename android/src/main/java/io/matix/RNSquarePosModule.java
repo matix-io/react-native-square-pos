@@ -112,6 +112,10 @@ public class RNSquarePosModule extends ReactContextBaseJavaModule {
 			builder.restrictTendersTo(tenderTypes);
 		}
 
+		if (data.hasKey("locationId")) {
+			builder.enforceBusinessLocation(data.getString("locationId"));
+		}
+
 		ChargeRequest request = builder.build();
 
 		try {
