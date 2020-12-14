@@ -74,16 +74,19 @@ RCT_EXPORT_METHOD(
 		autoReturn = [options objectForKey:@"returnAutomaticallyAfterPayment"];
 	}
 
-	SCCAPIRequest *request = [SCCAPIRequest requestWithCallbackURL:callbackURL
-															amount:amount
-													userInfoString:nil
+	SCCAPIRequest *request = [SCCAPIRequest
+														requestWithCallbackURL:callbackURL
+														amount:amount
+														userInfoString:nil
 														locationID:locationId
-													   		 notes:notes
-														  customerID:nil
-											  supportedTenderTypes:tenderTypes
-												 clearsDefaultFees:NO
-								   returnAutomaticallyAfterPayment:autoReturn
-															 error:&error];
+														notes:notes
+														customerID:nil
+														supportedTenderTypes:tenderTypes
+														clearsDefaultFees:NO
+														returnsAutomaticallyAfterPayment:autoReturn
+														disablesKeyedInCardEntry:NO
+														skipsReceipt:NO
+														error:&error];
 	[SCCAPIConnection performRequest:request error:&error];
 	if (error != nil) {
 		onError(@[[NSNumber numberWithInt:[error code]], [error localizedDescription]]);
